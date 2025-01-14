@@ -14,9 +14,15 @@ app.use(express.static('public'))
 
 //Templating Engine
 app.use(expressLayouts)
+app.set('layout', './layouts/main')
+app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => {
-  res.render('index.js')
+  const locals = {
+    title: 'NodeJs notes',
+    description: 'Notes App By Shubham Maske'
+  }
+  res.render('index', locals)
 })
 
 app.listen(port, () => {
