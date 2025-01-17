@@ -17,13 +17,16 @@ app.use(expressLayouts)
 app.set('layout', './layouts/main')
 app.set('view engine', 'ejs')
 
-app.get('/', (req, res) => {
-  const locals = {
-    title: 'NodeJs notes',
-    description: 'Notes App By Shubham Maske'
-  }
-  res.render('index', locals)
+// routes
+app.use('/', require('./server/routes/index'))
+app.use('/', require('./server/routes/dashboard'))
+
+
+// page not found error 
+app.get('*', function (req, res) {
+  res.status(404).render('404')
 })
+
 
 app.listen(port, () => {
   console.log(`server is running on port ${port}`)
